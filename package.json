@@ -10,6 +10,7 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "helmet": "^3.21.3",
     "morgan": "~1.9.1",
     "node-watch": "^0.6.3",
     "scripts": "^0.1.0"
@@ -17,13 +18,12 @@
   "devDependencies": {
     "nodemon": "^2.0.2"
   },
-  "nodemonConfig":{
-    "delay":2000,
+  "nodemonConfig": {
+    "delay": 2000,
     "ignore": [
       "node_modules/*",
-       "dist/*",
-        "*/*.css"
-      ]
-
+      "dist/*",
+      "*/*.css"
+    ]
   }
 }
