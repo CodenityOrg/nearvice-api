@@ -12,6 +12,8 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:8080',
+  'https://nearvice.stage.codenity.org',
+  'https://nearvice.dev.codenity.org',
   'https://nearvice.codenity.org'
 ];
 
