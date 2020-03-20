@@ -4,14 +4,19 @@
   "private": true,
   "scripts": {
     "watch": "nodemon",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "helmet": "^3.21.3",
+    "mongoose": "^5.9.5",
+    "mongoose-type-email": "^1.0.12",
+    "mongoose-unique-validator": "^2.0.3",
     "morgan": "~1.9.1",
     "node-watch": "^0.6.3",
     "scripts": "^0.1.0"
@@ -21,6 +26,7 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^11.0.0",
+    "jest": "^25.1.0",
     "nodemon": "^2.0.2"
   },
   "nodemonConfig": {
