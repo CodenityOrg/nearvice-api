@@ -8,7 +8,7 @@ const login = async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) throw errors.notfound('User');
         if (!bcrypt.compareSync(password, user.password)) throw errors.unauthorized();
-        return res.json(currentUser);
+        return res.json(user);
     } catch (error) {
         return Promise.reject(error);
     }
