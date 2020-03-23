@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const config = require('../config');
 
 const connect = () => mongoose
-  .connect('mongodb://localhost:27017/nearvicedb', {
+  .connect(config.dbURI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,

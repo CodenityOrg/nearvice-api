@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "watch": "nodemon",
     "start": "node ./bin/www",
+    "dev": "cross-env NODE_ENV=local node bin/www",
+    "dev:watch": "cross-env NODE_ENV=local nodemon bin/www",
+    "production": "cross-env NODE_ENV=production node bin/www",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "dependencies": {
