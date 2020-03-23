@@ -10,9 +10,29 @@ const environments = {
   production,
 };
 
+const getDbURI = ({
+  host, port, name, user = '', password = '',
+}) => {
+  const uri = 'mongodb://';
+  const defaultUri = `${host}${port ? `:${port}` : ''}/${name}`;
+
+  const hasCredentials = user && password;
+
+  if (hasCredentials) {
+    return `${uri}${user}:${password}@${defaultUri}`;
+  }
+
+  return `${uri}${defaultUri}`;
+};
+
 const initConfig = () => {
   const { NODE_ENV } = process.env;
-  return environments[NODE_ENV] || local;
+  const config = environments[NODE_ENV] || local;
+  const { db = local.db } = config;
+  return {
+    ...config,
+    dbURI: getDbURI(db),
+  };
 };
 
 module.exports = initConfig();
