@@ -8,9 +8,7 @@ const mongoose = require('mongoose');
 
 const loaders = require('./loaders');
 
-
 mongoose.Promise = global.Promise;
-
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

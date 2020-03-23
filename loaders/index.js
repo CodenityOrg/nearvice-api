@@ -1,9 +1,7 @@
-const { connect } = require('./database');
+const { connect, drop } = require('./database');
 
 const init = () => {
-  const loaders = Promise.all([
-        connect(),
-  ]);
+  const loaders = Promise.all([drop().then(() => connect())]);
   return loaders;
 };
 
