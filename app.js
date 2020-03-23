@@ -3,12 +3,21 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
-const cors = require('cors')
+const cors = require('cors');
+const mongoose = require('mongoose');
+
+const loaders = require('./loaders');
+
+
+mongoose.Promise = global.Promise;
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+
+loaders.init();
 
 const allowedOrigins = [
   'http://localhost:8080',

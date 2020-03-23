@@ -14,7 +14,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "helmet": "^3.21.3",
-    "mongoose": "^5.9.5",
+    "mongoose": "^5.9.6",
     "mongoose-type-email": "^1.0.12",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "~1.9.1",
