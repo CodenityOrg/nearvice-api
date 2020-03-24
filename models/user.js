@@ -36,6 +36,10 @@ const userSchema = new Schema({
     required: true,
   },
   phone: String,
+  specialist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Specialist',
+  },
 }, {
   timestamps: true,
 });
