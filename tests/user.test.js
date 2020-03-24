@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const User = require('../models/user')
+const User = require('../models/user');
 
 // TODO configure to test apis
 
@@ -12,7 +11,7 @@ const initialUsers = [
     city: 'Córdoba',
     country: 'Argentina',
     phone: null,
-  }
+  },
 ];
 
 test('user is created', () => {

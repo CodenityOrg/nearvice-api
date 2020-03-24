@@ -21,7 +21,7 @@ const allowedOrigins = [
   'http://localhost:8080',
   'https://nearvice.stage.codenity.org',
   'https://nearvice.dev.codenity.org',
-  'https://nearvice.codenity.org'
+  'https://nearvice.codenity.org',
 ];
 
 app.use(cors({
@@ -33,7 +33,7 @@ app.use(cors({
       return callback(new Error(msg), false);
     }
     return callback(null, true);
-  }
+  },
 }));
 
 app.use(
@@ -41,10 +41,10 @@ app.use(
     dnsPrefetchControl: { allow: true },
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"]
-      }
-    }
-  })
+        defaultSrc: ["'self'"],
+      },
+    },
+  }),
 );
 app.use(logger('dev'));
 app.use(express.json());
