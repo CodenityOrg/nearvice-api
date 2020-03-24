@@ -7,4 +7,5 @@ module.exports = {
     user: process.env.DBUSER,
     password: process.env.DBPASSWORD,
   },
+  secretKey: process.env.SECRETKEY,
 };

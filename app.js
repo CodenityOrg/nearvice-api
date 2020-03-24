@@ -1,11 +1,12 @@
-const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
 const logger = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
-const mongoose = require('mongoose');
 
+const config = require('./config');
 const loaders = require('./loaders');
 
 mongoose.Promise = global.Promise;
@@ -14,6 +15,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+
+app.set('secretKey', config.secretKey);
 
 loaders.init();
 
