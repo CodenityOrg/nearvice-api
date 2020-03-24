@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "watch": "nodemon",
     "start": "node ./bin/www",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
+    "dev": "cross-env NODE_ENV=local node bin/www",
+    "dev:watch": "cross-env NODE_ENV=local nodemon bin/www",
+    "production": "cross-env NODE_ENV=production node bin/www",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --detectOpenHandles"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -15,7 +17,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "helmet": "^3.21.3",
-    "mongoose": "^5.9.5",
+    "mongoose": "^5.9.6",
     "mongoose-type-email": "^1.0.12",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "~1.9.1",
@@ -37,5 +39,8 @@
       "dist/*",
       "*/*.css"
     ]
+  },
+  "engines": {
+    "node": ">=8.10.0"
   }
 }
