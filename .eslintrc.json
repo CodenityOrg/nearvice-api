@@ -1,10 +1,8 @@
 {
     "extends": ["airbnb-base", "plugin:node/recommended"],
-    "parserOptions": {
-        "ecmaVersion": 2020
-    },
+    "parserOptions": { "ecmaVersion": 2020 },
     "rules": {
-        "indent": 4,
+        "indent": 2,
         "node/exports-style": ["error", "module.exports"],
         "no-console":"off",
         "linebreak-style":"off",
@@ -19,6 +17,7 @@
         "no-restricted-globals": "warn",
         "prefer-arrow-callback":"warn",
         "prefer-template": "warn",
-        "space-before-function-paren":"warn"
+        "space-before-function-paren":"warn",
+        "no-underscore-dangle": ["error", { "allow": ["_id", "__v"] }]
     }
 }
