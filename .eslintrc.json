@@ -1,6 +1,8 @@
 {
-    "extends": ["airbnb-base","plugin:node/recommended"],
-
+    "extends": ["airbnb-base", "plugin:node/recommended"],
+    "parserOptions": {
+        "ecmaVersion": 2020
+    },
     "rules": {
         "node/exports-style": ["error", "module.exports"],
         "no-console":"off",
@@ -17,6 +19,5 @@
         "prefer-arrow-callback":"warn",
         "prefer-template": "warn",
         "space-before-function-paren":"warn"
-
     }
 }
