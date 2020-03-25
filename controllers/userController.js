@@ -9,7 +9,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) throw errors.notfound('User');
     if (!bcrypt.compareSync(password, user.password)) throw errors.unauthorized();
-    const expiresIn = keepMe ? '6h' : '1h';
+    const expiresIn = keepMe ? '1 d' : '7 d';
     const token = jwt.sign({ id: user._id }, req.app.get('secretKey'), { expiresIn });
     return res.json({
       userId: user._id,
