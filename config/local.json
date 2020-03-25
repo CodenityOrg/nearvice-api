@@ -4,5 +4,6 @@
         "host": "localhost",
         "name": "nearvicedb",
         "port": 27017
-    }
+    },
+    "secretKey": "nearvicesecretkey"
 }

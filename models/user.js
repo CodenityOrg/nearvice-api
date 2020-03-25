@@ -1,8 +1,13 @@
+/* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
+const bcrypt = require('bcrypt');
 const uniqueValidator = require('mongoose-unique-validator');
 require('mongoose-type-email');
 
-const userSchema = new mongoose.Schema({
+const saltRounds = 10;
+
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -46,10 +51,16 @@ userSchema.set('toJSON', {
     delete returnedObject.__v;
     // the password should not be revealed
     delete returnedObject.password;
-  }
-})
+  },
+});
 
 userSchema.plugin(uniqueValidator);
+
+// hash user password before saving into database
+userSchema.pre('save', function (next) {
+  this.password = bcrypt.hashSync(this.password, saltRounds);
+  next();
+});
 
 const User = mongoose.model('User', userSchema);
 

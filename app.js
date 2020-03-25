@@ -1,11 +1,12 @@
-const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
 const logger = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
-const mongoose = require('mongoose');
 
+const config = require('./config');
 const loaders = require('./loaders');
 
 mongoose.Promise = global.Promise;
@@ -15,13 +16,15 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
+app.set('secretKey', config.secretKey);
+
 loaders.init();
 
 const allowedOrigins = [
   'http://localhost:8080',
   'https://nearvice.stage.codenity.org',
   'https://nearvice.dev.codenity.org',
-  'https://nearvice.codenity.org'
+  'https://nearvice.codenity.org',
 ];
 
 app.use(cors({
@@ -33,7 +36,7 @@ app.use(cors({
       return callback(new Error(msg), false);
     }
     return callback(null, true);
-  }
+  },
 }));
 
 app.use(
@@ -41,10 +44,10 @@ app.use(
     dnsPrefetchControl: { allow: true },
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"]
-      }
-    }
-  })
+        defaultSrc: ["'self'"],
+      },
+    },
+  }),
 );
 app.use(logger('dev'));
 app.use(express.json());
