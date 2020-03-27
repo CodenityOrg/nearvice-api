@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const errors = require('../common/errors');
+const { errors, generateToken } = require('../common');
 
 const login = async (req, res) => {
   try {
@@ -10,7 +9,7 @@ const login = async (req, res) => {
     if (!user) throw errors.notfound('User');
     if (!bcrypt.compareSync(password, user.password)) throw errors.unauthorized();
     const expiresIn = keepMe ? '1d' : '7d';
-    const token = jwt.sign({ id: user._id }, req.app.get('secretKey'), { expiresIn });
+    const token = generateToken({ id: user._id }, expiresIn);
     return res.json({
       userId: user._id,
       token: token,
@@ -32,7 +31,7 @@ const register = async (req, res) => {
     const user = await User.create(data);
     const userJson = user.toJSON();
     const expiresIn = '1d';
-    userJson.token = jwt.sign({ id: user._id }, req.app.get('secretKey'), { expiresIn });
+    userJson.token = generateToken({ id: user._id }, expiresIn, req.app);
     return res.json(userJson);
   } catch (error) {
     console.log(error);
