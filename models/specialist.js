@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+/* eslint-disable no-param-reassign */
+const mongoose = require('mongoose');
 
 const specialistSchema = new mongoose.Schema({
   user: {
@@ -21,8 +22,8 @@ specialistSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
     delete returnedObject.__v;
-  }
-})
+  },
+});
 
 const Specialist = mongoose.model('Specialist', specialistSchema);
 
