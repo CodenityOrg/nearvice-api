@@ -17,6 +17,25 @@ const login = async (req, res) => {
       expiresIn: expiresIn,
     });
   } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: 'error',
+      message: 'An error occurred trying to process your request',
+    });
+  }
+};
+
+const register = async (req, res) => {
+  try {
+    const data = req.body;
+    if (!Object.keys(data).length) throw errors.badRequest();
+    const user = await User.create(data);
+    const userJson = user.toJSON();
+    const expiresIn = '1d';
+    userJson.token = jwt.sign({ id: user._id }, req.app.get('secretKey'), { expiresIn });
+    return res.json(userJson);
+  } catch (error) {
+    console.log(error);
     return res.status(500).json({
       status: 'error',
       message: 'An error occurred trying to process your request',
@@ -26,4 +45,5 @@ const login = async (req, res) => {
 
 module.exports = {
   login,
+  register,
 };
