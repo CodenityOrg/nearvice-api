@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+/* eslint-disable no-undef */
 const User = require('../models/user');
 const Specialist = require('../models/specialist');
 
@@ -13,7 +13,7 @@ const initialUsers = [
     city: 'Córdoba',
     country: 'Argentina',
     phone: null,
-  }
+  },
 ];
 
 const initialSpecialists = [
