@@ -1,7 +1,11 @@
 /* eslint-disable no-undef */
 const mongoose = require('mongoose');
-const { connect } = require('../loaders/database');
+const { connect, drop } = require('../loaders/database');
 const User = require('../models/user');
+
+beforeAll(async () => connect());
+
+afterAll(async () => drop());
 
 const initialUsers = [
   {
@@ -14,8 +18,6 @@ const initialUsers = [
     phone: null,
   },
 ];
-
-beforeAll(async () => connect());
 
 describe('User', () => {
   test('create a valid user', async () => {

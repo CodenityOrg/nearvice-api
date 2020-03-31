@@ -1,9 +1,11 @@
 const development = require('./development');
 const production = require('./production');
 const stage = require('./stage');
+const test = require('./test');
 const local = require('./local');
 
 const environments = {
+  test,
   local,
   development,
   stage,
