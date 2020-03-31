@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
+const mongoose = require('mongoose');
+const { connect } = require('../loaders/database');
 const User = require('../models/user');
-
-// TODO configure to test apis
 
 const initialUsers = [
   {
@@ -15,8 +15,29 @@ const initialUsers = [
   },
 ];
 
-test('user is created', () => {
-  const firstUser = initialUsers[0];
-  const userObject = new User(firstUser);
-  expect(userObject.name).toBe(firstUser.name);
+beforeAll(async () => connect());
+
+describe('User', () => {
+  test('create a valid user', async () => {
+    const validUser = new User(initialUsers[0]);
+    const savedUser = await validUser.save();
+    expect(savedUser).toHaveProperty('_id');
+    expect(savedUser).toHaveProperty('name', initialUsers[0].name);
+    expect(savedUser).toHaveProperty('lastname', initialUsers[0].lastname);
+    expect(savedUser).toHaveProperty('email', initialUsers[0].email);
+    expect(savedUser).toHaveProperty('password');
+    expect(savedUser).toHaveProperty('city', initialUsers[0].city);
+    expect(savedUser).toHaveProperty('country', initialUsers[0].country);
+  });
+
+  test('create user without required field should failed', async () => {
+    const userWithoutRequiredField = new User({ name: 'TekLoon' });
+    let err;
+    try {
+      await userWithoutRequiredField.save();
+    } catch (error) {
+      err = error;
+    }
+    return expect(err).toBeInstanceOf(mongoose.Error.ValidationError);
+  });
 });
