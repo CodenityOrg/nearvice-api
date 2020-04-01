@@ -10,6 +10,5 @@ router.get('/', (req, res) => {
 
 
 router.post('/login', userController.login);
-router.post('/login/oauth', userController.loginoauth);
 
 module.exports = router;
