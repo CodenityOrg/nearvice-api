@@ -36,7 +36,35 @@ const register = async (req, res) => {
   }
 };
 
+const loginGoogle = async (req, res) => {
+  try {
+    const {
+      givenName,
+      familyName,
+      email,
+      tokenId,
+    } = req.body;
+    let user = await User.findOne({ email });
+    if (!user) {
+      const payload = {
+        name: givenName,
+        lastname: familyName,
+        email,
+        googleToken: tokenId,
+      };
+      user = await User.create(payload);
+    }
+    const userJson = user.toJSON();
+    const expiresIn = DAY_IN_SECONDS;
+    userJson.token = generateToken({ id: user._id }, expiresIn, req.app);
+    return res.status(200).json(userJson);
+  } catch (error) {
+    return buildError(res, error);
+  }
+};
+
 module.exports = {
   login,
   register,
+  loginGoogle,
 };
