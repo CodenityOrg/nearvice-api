@@ -5,6 +5,7 @@ const path = require('path');
 const logger = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const passport = require('passport');
 
 const config = require('./config');
 const loaders = require('./loaders');
@@ -16,6 +17,8 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
+require('dotenv').config();
+
 app.set('secretKey', config.secretKey);
 
 loaders.init();
@@ -26,6 +29,8 @@ const allowedOrigins = [
   'https://nearvice.dev.codenity.org',
   'https://nearvice.codenity.org',
 ];
+
+require('./config/passport')(passport);
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -54,7 +59,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

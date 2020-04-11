@@ -5,5 +5,10 @@
       "name": "test-nearvicedb",
       "port": 27017
   },
-  "secretKey": "nearvicesecretkey"
+  "secretKey": "nearvicesecretkey",
+  "facebookAuth": {
+    "clientID": "cleintID",
+    "clientSecret": "clientSecret",
+   "callbackURL": "callbackUrl"
+  }
 }
