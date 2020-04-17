@@ -1,0 +1,12 @@
+{
+    "port": 3000,
+        "db": {
+        "host": "localhost",
+            "name": "nearvicedb",
+            "port": 27017
+    },
+    "secretKey": "nearvicesecretkey",
+    "FACEBOOK_IDENT": "556608748315707",
+    "FACEBOOK_API_SECRET": "10218b4dac196d5026e4a8dc4e35534d",
+    "CALLBACK_URL": "http://localhost:3000/auth/facebook/callback"
+}
