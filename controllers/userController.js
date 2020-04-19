@@ -39,18 +39,16 @@ const register = async (req, res) => {
 const loginGoogle = async (req, res) => {
   try {
     const {
-      givenName,
-      familyName,
-      email,
-      tokenId,
-    } = req.body;
+      // eslint-disable-next-line camelcase
+      sub, given_name, family_name, email,
+    } = req.payload;
     let user = await User.findOne({ email });
     if (!user) {
       const payload = {
-        name: givenName,
-        lastname: familyName,
+        name: given_name,
+        lastname: family_name,
+        googleId: sub,
         email,
-        googleToken: tokenId,
       };
       user = await User.create(payload);
     }

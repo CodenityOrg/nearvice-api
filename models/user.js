@@ -27,6 +27,9 @@ const userSchema = new Schema({
     type: String,
     // required: true,
   },
+  googleId: {
+    type: String,
+  },
   city: {
     type: String,
     // required: true,

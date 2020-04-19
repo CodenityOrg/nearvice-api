@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = require('../middleware/auth');
+const authGoogle = require('../middleware/authGoogle');
 const userController = require('../controllers/userController');
 
 const router = express.Router();
@@ -8,7 +9,7 @@ router.get('/', (req, res) => {
   res.send('respond with a resource');
 });
 
-router.post('/google', userController.loginGoogle);
+router.post('/google', authGoogle, userController.loginGoogle);
 router.post('/login', userController.login);
 router.post('/register', userController.register);
 router.post('/hello', auth, (req, res) => {
