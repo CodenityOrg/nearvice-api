@@ -39,23 +39,23 @@ const register = async (req, res) => {
 const loginGoogle = async (req, res) => {
   try {
     const {
-      // eslint-disable-next-line camelcase
-      sub, given_name, family_name, email,
+      sub: googleId, given_name: name, family_name: lastname, email,
     } = req.payload;
     let user = await User.findOne({ email });
     if (!user) {
       const payload = {
-        name: given_name,
-        lastname: family_name,
-        googleId: sub,
-        email,
+        name, lastname, googleId, email,
       };
       user = await User.create(payload);
     }
     const userJson = user.toJSON();
     const expiresIn = DAY_IN_SECONDS;
-    userJson.token = generateToken({ id: user._id }, expiresIn, req.app);
-    return res.status(200).json(userJson);
+    const token = generateToken({ id: user._id }, expiresIn, req.app);
+    return res.status(200).json({
+      userId: userJson.id,
+      token: token,
+      expiresIn: expiresIn,
+    });
   } catch (error) {
     return buildError(res, error);
   }
