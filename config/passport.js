@@ -1,5 +1,4 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
-// const User = require('../models/user');
 const test = require('./local.json');
 
 require('dotenv').config();
@@ -22,24 +21,6 @@ module.exports = function (passport) {
         profileFields: ['id', 'displayName', 'name', 'email'],
       },
       ((accessToken, refreshToken, profile, done) => {
-        process.nextTick(() => {
-
-        // Realizar acciones a la base de datos
-        //   User.findOne({ 'local.username': email }, (err, user) => {
-        //     if (err) return done(err);
-        //     if (user) {
-        //       return done(null, false, req.flash('signupMessage', 'That email already taken'));
-        //     }
-        //     const newUser = new User();
-        //     newUser.local.username = email;
-        //     newUser.local.password = newUser.generateHash(password);
-
-        //     newUser.save((err) => {
-        //       if (err) throw err;
-        //       return done(null, newUser);
-        //     });
-        //   });
-        });
         return done(null, profile);
       }),
     ),

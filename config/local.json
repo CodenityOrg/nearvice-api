@@ -6,7 +6,7 @@
         "port": 27017
     },
     "secretKey": "nearvicesecretkey",
-    "FACEBOOK_IDENT": "ident",
-    "FACEBOOK_API_SECRET": "api_secret",
-    "CALLBACK_URL": "http://localhost:3000/auth/facebook/callback"
+    "FACEBOOK_IDENT": "2740454139574435",
+    "FACEBOOK_API_SECRET": "c7e03dc9c08c0bf0eee375d7ccf5a186",
+    "CALLBACK_URL": "http://localhost:3000/users/facebook/callback"
 }

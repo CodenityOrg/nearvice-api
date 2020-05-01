@@ -4,6 +4,34 @@ const { errors, generateToken, buildError } = require('../common');
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
 
+const facebookLogin = async (req, res) => {
+  try {
+    const {
+      first_name,
+      last_name,
+      email,
+      id
+    } = req.user._json;
+    let user = await User.findOne({ email: email });
+    if (!user) {
+      const payload = {
+        name: first_name, lastname: last_name, email: email, facebookId: id,
+      };
+      user = await User.create(payload);
+    }
+    const userJson = user.toJSON();
+    const expiresIn = DAY_IN_SECONDS;
+    const token = generateToken({ id: user._id }, expiresIn, req.app);
+    return res.status(200).json({
+      userId: userJson.id,
+      token: token,
+      expiresIn: expiresIn,
+    });
+  } catch (err) {
+    return buildError(res, err);
+  }
+};
+
 const login = async (req, res) => {
   try {
     const { email, password, keepMe } = req.body;
@@ -39,4 +67,5 @@ const register = async (req, res) => {
 module.exports = {
   login,
   register,
+  facebookLogin,
 };
