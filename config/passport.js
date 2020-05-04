@@ -15,14 +15,12 @@ module.exports = function (passport) {
   passport.use(
     new FacebookStrategy(
       {
-        clientID: process.env.FACEBOOK_IDENT || test.facebookAuth.clientID,
-        clientSecret: process.env.FACEBOOK_API_SECRET || test.facebookAuth.clientSecret,
-        callbackURL: process.env.CALLBACK_URL || test.facebookAuth.clienttSecret,
+        clientID: process.env.FACEBOOK_IDENT || test.FACEBOOK_IDENT,
+        clientSecret: process.env.FACEBOOK_API_SECRET || test.FACEBOOK_API_SECRET,
+        callbackURL: process.env.CALLBACK_URL || test.CALLBACK_URL,
         profileFields: ['id', 'displayName', 'name', 'email'],
       },
-      ((accessToken, refreshToken, profile, done) => {
-        return done(null, profile);
-      }),
+      ((accessToken, refreshToken, profile, done) => done(null, profile)),
     ),
   );
 };
