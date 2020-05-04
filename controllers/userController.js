@@ -7,15 +7,12 @@ const DAY_IN_SECONDS = 24 * 60 * 60;
 const facebookLogin = async (req, res) => {
   try {
     const {
-      first_name,
-      last_name,
-      email,
-      id
+      email, id, first_name: name, last_name: lastname,
     } = req.user._json;
     let user = await User.findOne({ email: email });
     if (!user) {
       const payload = {
-        name: first_name, lastname: last_name, email: email, facebookId: id,
+        name, lastname, email, facebookId: id,
       };
       user = await User.create(payload);
     }
