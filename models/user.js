@@ -25,15 +25,18 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
+  },
+  googleId: {
+    type: String,
   },
   city: {
     type: String,
-    required: true,
+    // required: true,
   },
   country: {
     type: String,
-    required: true,
+    // required: true,
   },
   phone: String,
   specialist: {
@@ -58,6 +61,7 @@ userSchema.plugin(uniqueValidator);
 
 // hash user password before saving into database
 userSchema.pre('save', function (next) {
+  if (!this.password) next();
   this.password = bcrypt.hashSync(this.password, saltRounds);
   next();
 });

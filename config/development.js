@@ -8,4 +8,5 @@ module.exports = {
     password: process.env.DBPASSWORD,
   },
   secretKey: process.env.SECRETKEY,
+  googleClientId: process.env.GOOGLECLIENTID,
 };
