@@ -18,6 +18,6 @@
         "prefer-arrow-callback":"warn",
         "prefer-template": "warn",
         "space-before-function-paren":"warn",
-        "no-underscore-dangle": ["error", { "allow": ["_id", "__v"] }]
+        "no-underscore-dangle": ["error", { "allow": ["_id", "__v", "_json"] }]
     }
 }
