@@ -6,7 +6,17 @@ const DAY_IN_SECONDS = 24 * 60 * 60;
 
 const socialLogin = async (req, res) => {
   try {
-    const user = await User.create(req.user);
+    const { googleId, facebookId } = req.user;
+    const filter = {};
+    if (!googleId || !facebookId) throw errors.badRequest();
+    if (facebookId) {
+      filter.facebookId = facebookId;
+    }
+
+    if (googleId) {
+      filter.googleId = googleId;
+    }
+    const user = await User.findOrCreate(req.user, filter);
     const userJson = user.toJSON();
     const expiresIn = DAY_IN_SECONDS;
     const token = generateToken({ id: user._id }, expiresIn, req.app);
