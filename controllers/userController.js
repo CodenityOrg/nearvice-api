@@ -20,6 +20,20 @@ const socialLogin = async (req, res) => {
   }
 };
 
+const loginGoogle = async (req, res) => {
+  try {
+    const {
+      sub: googleId, given_name: name, family_name: lastname, email,
+    } = req.payload;
+    req.user = {
+      name, lastname, email, googleId,
+    };
+    return socialLogin(req, res);
+  } catch (error) {
+    return buildError(res, error);
+  }
+};
+
 const login = async (req, res) => {
   try {
     const { email, password, keepMe } = req.body;
@@ -56,4 +70,5 @@ module.exports = {
   login,
   register,
   socialLogin,
+  loginGoogle,
 };
