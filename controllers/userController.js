@@ -4,18 +4,9 @@ const { errors, generateToken, buildError } = require('../common');
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
 
-const facebookLogin = async (req, res) => {
+const socialLogin = async (req, res) => {
   try {
-    const {
-      email, id, first_name: name, last_name: lastname,
-    } = req.user._json;
-    let user = await User.findOne({ email: email });
-    if (!user) {
-      const payload = {
-        name, lastname, email, facebookId: id,
-      };
-      user = await User.create(payload);
-    }
+    const user = await User.create(req.user);
     const userJson = user.toJSON();
     const expiresIn = DAY_IN_SECONDS;
     const token = generateToken({ id: user._id }, expiresIn, req.app);
@@ -24,8 +15,8 @@ const facebookLogin = async (req, res) => {
       token: token,
       expiresIn: expiresIn,
     });
-  } catch (err) {
-    return buildError(res, err);
+  } catch (error) {
+    return buildError(res, error);
   }
 };
 
@@ -61,34 +52,8 @@ const register = async (req, res) => {
   }
 };
 
-const loginGoogle = async (req, res) => {
-  try {
-    const {
-      sub: googleId, given_name: name, family_name: lastname, email,
-    } = req.payload;
-    let user = await User.findOne({ email });
-    if (!user) {
-      const payload = {
-        name, lastname, googleId, email,
-      };
-      user = await User.create(payload);
-    }
-    const userJson = user.toJSON();
-    const expiresIn = DAY_IN_SECONDS;
-    const token = generateToken({ id: user._id }, expiresIn, req.app);
-    return res.status(200).json({
-      userId: userJson.id,
-      token: token,
-      expiresIn: expiresIn,
-    });
-  } catch (error) {
-    return buildError(res, error);
-  }
-};
-
 module.exports = {
   login,
   register,
-  facebookLogin,
-  loginGoogle,
+  socialLogin,
 };
