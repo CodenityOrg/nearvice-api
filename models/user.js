@@ -28,11 +28,11 @@ const userSchema = new Schema({
   },
   googleId: {
     type: String,
-    required: true,
+    unique: true,
   },
   facebookId: {
     type: String,
-    required: true,
+    unique: true,
   },
   city: {
     type: String,
@@ -67,6 +67,18 @@ userSchema.pre('save', function (next) {
   this.password = bcrypt.hashSync(this.password, saltRounds);
   next();
 });
+
+userSchema.statics.findOrCreate = async function (args, filter) {
+  try {
+    let user = await this.findOne(filter);
+    if (!user) {
+      user = await this.create(args);
+    }
+    return user;
+  } catch (error) {
+    return console.log(error);
+  }
+};
 
 const User = mongoose.model('User', userSchema);
 
