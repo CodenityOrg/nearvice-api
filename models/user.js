@@ -25,21 +25,20 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    // required: true,
   },
   googleId: {
     type: String,
+    required: true,
   },
   facebookId: {
     type: String,
+    required: true,
   },
   city: {
     type: String,
-    // required: true,
   },
   country: {
     type: String,
-    // required: true,
   },
   phone: String,
   specialist: {
