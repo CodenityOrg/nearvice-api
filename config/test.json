@@ -5,5 +5,6 @@
     "name": "test-nearvicedb",
     "port": 27017
   },
-  "secretKey": "nearvicesecretkey"
+  "secretKey": "nearvicesecretkey",
+  "googleClientId" : "786244984714-b3ldpd35bsdpatvhnu6mvmnnpb88esnh.apps.googleusercontent.com"
 }

@@ -8,7 +8,7 @@ const socialLogin = async (req, res) => {
   try {
     const { googleId, facebookId } = req.user;
     const filter = {};
-    if (!googleId || !facebookId) throw errors.badRequest();
+    if (!googleId && !facebookId) throw errors.badRequest();
     if (facebookId) {
       filter.facebookId = facebookId;
     }
