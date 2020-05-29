@@ -7,6 +7,11 @@ module.exports = {
     user: process.env.DBUSER,
     password: process.env.DBPASSWORD,
   },
+  facebook: {
+    id: process.env.FB_ID,
+    secret: process.env.FB_SECRET,
+    callbackURL: process.env.FB_CALLBACK,
+  },
   secretKey: process.env.SECRETKEY,
   googleClientId: process.env.GOOGLECLIENTID,
 };
