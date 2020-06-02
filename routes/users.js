@@ -13,7 +13,9 @@ router.get('/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
 router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }),
   (req, res) => {
-    userController.facebookLogin(req, res);
+    res.json(req.user)
+    // TODO: Sync Facebook Data from Passport. This function returns "Bad Request" error, due unexpected fields from Passport
+    // userController.facebookLogin(req, res);
   });
 router.post('/google', authGoogle, userController.loginGoogle);
 router.post('/login', userController.login);

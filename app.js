@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const passport = require('passport');
 
-const config = require('./config');
+const config = require('env-config-params')();
 const loaders = require('./loaders');
 
 mongoose.Promise = global.Promise;
@@ -18,6 +18,7 @@ const usersRouter = require('./routes/users');
 const app = express();
 
 require('dotenv').config();
+require('./middleware/strategies');
 
 app.set('secretKey', config.secretKey);
 
@@ -30,7 +31,6 @@ const allowedOrigins = [
   'https://nearvice.codenity.org',
 ];
 
-require('./config/passport')(passport);
 
 app.use(cors({
   origin: function (origin, callback) {
