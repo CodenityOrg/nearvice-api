@@ -25,21 +25,20 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    // required: true,
   },
   googleId: {
     type: String,
+    unique: true,
   },
   facebookId: {
     type: String,
+    unique: true,
   },
   city: {
     type: String,
-    // required: true,
   },
   country: {
     type: String,
-    // required: true,
   },
   phone: String,
   specialist: {
@@ -68,6 +67,18 @@ userSchema.pre('save', function (next) {
   this.password = bcrypt.hashSync(this.password, saltRounds);
   next();
 });
+
+userSchema.statics.findOrCreate = async function (args, filter) {
+  try {
+    let user = await this.findOne(filter);
+    if (!user) {
+      user = await this.create(args);
+    }
+    return user;
+  } catch (error) {
+    return console.log(error);
+  }
+};
 
 const User = mongoose.model('User', userSchema);
 
