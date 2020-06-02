@@ -6,8 +6,10 @@
         "port": 27017
     },
     "secretKey": "nearvicesecretkey",
-    "FACEBOOK_IDENT": "2740454139574435",
-    "FACEBOOK_API_SECRET": "c7e03dc9c08c0bf0eee375d7ccf5a186",
-    "CALLBACK_URL": "http://localhost:3000/users/facebook/callback",
+    "facebook": {
+        "id": "556608748315707",
+        "apiSecret": "10218b4dac196d5026e4a8dc4e35534d",
+        "callbackUrl": "http://localhost:3000/users/facebook/callback"
+    },
     "googleClientId" : "1096025496822-9r4uqvug35finf3ier0ig09ofjqge8oj.apps.googleusercontent.com"
 }

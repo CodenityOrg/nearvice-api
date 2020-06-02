@@ -1,5 +1,5 @@
 const { OAuth2Client } = require('google-auth-library');
-const config = require('../config');
+const config = require('env-config-params')();
 
 module.exports = async function (req, res, next) {
   const { token } = req.body;
