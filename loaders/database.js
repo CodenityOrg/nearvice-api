@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const config = require('../config');
+const config = require('env-config-params')({
+  dbURI: true,
+});
 
 const connect = () => mongoose
   .connect(config.dbURI, {
