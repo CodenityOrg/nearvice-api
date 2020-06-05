@@ -11,5 +11,5 @@
         "apiSecret": "10218b4dac196d5026e4a8dc4e35534d",
         "callbackUrl": "http://localhost:3000/users/facebook/callback"
     },
-    "googleClientId" : "1096025496822-9r4uqvug35finf3ier0ig09ofjqge8oj.apps.googleusercontent.com"
+    "googleClientId" : "786244984714-b3ldpd35bsdpatvhnu6mvmnnpb88esnh.apps.googleusercontent.com"
 }
