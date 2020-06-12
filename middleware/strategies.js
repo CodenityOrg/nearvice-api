@@ -18,8 +18,6 @@ passport.use(
       callbackURL: config.facebook.callbackUrl,
       profileFields: ['id', 'displayName', 'name', 'email'],
     },
-    ((accessToken, refreshToken, profile, done) => {
-      return done(null, profile);
-    }),
+    ((accessToken, refreshToken, profile, done) => done(null, profile)),
   ),
 );
