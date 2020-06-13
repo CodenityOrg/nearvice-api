@@ -7,7 +7,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const passport = require('passport');
 
+require('dotenv').config();
 const config = require('env-config-params')();
+
 const loaders = require('./loaders');
 
 mongoose.Promise = global.Promise;
@@ -17,7 +19,6 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-require('dotenv').config();
 require('./middleware/strategies');
 
 app.set('secretKey', config.secretKey);
